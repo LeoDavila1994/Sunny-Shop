@@ -27,7 +27,25 @@ section{
 .car-loader{
   font-size: 7rem;
   color: whitesmoke;
-  transform: rotate(-30deg);
+
+  animation-name: car;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: linear;
+}
+@keyframes car {
+  0%{
+    transform: translate(-50vw);
+  }
+
+  50%{
+    transform: rotate(-30deg);
+  }
+  100%{
+    transform: translate(150vw);
+  }
+
 }
 
 .nav-container{
@@ -91,6 +109,7 @@ select{
   width: 90px;
   color: white;
   border: 1px solid #ed6d7f;
+  font-size: 0.7rem;
 }
 
 input{

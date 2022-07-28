@@ -32,7 +32,7 @@ const Home = () => {
         function cb(product) {
             return product.category.name === e.target.value;
         }
-        dispatch(setProducts(results))
+        dispatch(setProducts(results));
     }
 
 
