@@ -76,8 +76,31 @@ nav{
   align-items: center;
   flex-wrap: wrap;
   gap: 4rem;
-  margin-top: 10rem;
+  margin-top: 5rem;
   margin-bottom: 5rem;
+}
+
+.select-container{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+select{
+  background-color:#ed6d7f;
+  width: 90px;
+  color: white;
+  border: 1px solid #ed6d7f;
+}
+
+input{
+  width: 100%;
+  outline: none;
+  border-top: 0;
+  border-left: 0;
+  border-right: 1px solid #ed6d7f;
+  border-bottom: 1px solid #ed6d7f;
+  text-align: center;
 }
 
 .card-info{
@@ -149,8 +172,7 @@ strong{
   margin-top: 3rem;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 3rem;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 

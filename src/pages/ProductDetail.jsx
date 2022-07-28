@@ -12,8 +12,6 @@ const ProductDetail = () => {
             .then(res => setProduct(res.data.data.product))
     }, []);
 
-    console.log(product);
-
     return (
         <section>
             <div className='data-container'>
