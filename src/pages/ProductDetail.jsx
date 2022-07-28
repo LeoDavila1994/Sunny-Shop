@@ -22,8 +22,10 @@ const ProductDetail = () => {
                     <p>Category: {product.category}.</p>
                     <p>Id: {product.id}.</p>
                 </div>
-                <div className='data-img'>
-                    <img src={product.productImgs} alt="" />
+                <div className='data-img-container'>
+                    <div className='data-img'>
+                        <img src={product.productImgs} alt="" />
+                    </div>
                 </div>
                 <div className='price-container'>
                     <p>${product.price} usd</p>
