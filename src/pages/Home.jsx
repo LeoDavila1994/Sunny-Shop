@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/';
 import { useNavigate } from 'react-router-dom';
-import { getProductsThunk, setProducts, filterInputThunk } from "../store/slices/products.slice";
+import { getProductsThunk, selectThunk, filterInputThunk } from "../store/slices/products.slice";
 
 
 
@@ -25,19 +25,60 @@ const Home = () => {
     const productDetail = (id) => {
         navigate(`/product/${id}`)
     }
-    const [ inputValue, setInputValue ] = useState("");
+    const [inputValue, setInputValue] = useState("");
 
-    const search = () => {
-        dispatch(filterInputThunk(inputValue))
+    const submit = e => {
+        e.preventDefault();
+        if (inputValue[0] === inputValue[0].toUpperCase() && inputValue[inputValue.length - 1] === inputValue[inputValue.length - 1].toUpperCase()) {
+            const toUpp = inputValue.split("");
+            let change = "";
+            for (let i = 0; i < toUpp.length; i++) {
+                if (toUpp[i] != toUpp[i].toUpperCase) {
+                    toUpp.splice(i, 1, toUpp[i].toUpperCase());
+                    const newWord = toUpp.toString();
+                    change = newWord.replace(/,/g, "");
+                }
+            }
+            dispatch(filterInputThunk(change))
+        } else if (inputValue[0] === inputValue[0].toLowerCase()) {
+            const toUpp = inputValue.split("");
+            let change = "";
+            for (let i = 0; i < toUpp.length; i++) {
+                if (toUpp[0] != toUpp[0].toUpperCase()) {
+                    toUpp.splice(0, 1, toUpp[0].toUpperCase());
+                    for (let i = 1; i < toUpp.length; i++) {
+                        if (toUpp[i] === toUpp[i].toUpperCase()) {
+                            toUpp.splice(i, 1, toUpp[i].toLowerCase())
+                            const newWord = toUpp.toString();
+                            change = newWord.replace(/,/g, "");
+                        } else {
+                            const newWord = toUpp.toString();
+                            change = newWord.replace(/,/g, "");
+                        }
+                    }
+                }
+            }
+            dispatch(filterInputThunk(change))
+        } else {
+            const toUpp = inputValue.split("");
+            let change = "";
+            for (let i = 1; i < toUpp.length; i++) {
+                if (toUpp[i] === toUpp[i].toUpperCase()) {
+                    toUpp.splice(i, 1, toUpp[i].toLowerCase())
+                    const newWord = toUpp.toString();
+                    change = newWord.replace(/,/g, "");
+                } else {
+                    const newWord = toUpp.toString();
+                    change = newWord.replace(/,/g, "");
+                }
+            }
+            dispatch(filterInputThunk(change))
+        }
     }
 
     const filterCatego = e => {
-        const productList = products;
-        const results = productList.filter(cb);
-        function cb(product) {
-            return product.category.name === e.target.value;
-        }
-        dispatch(setProducts(results));
+        const filt = e.target.value
+        dispatch(selectThunk(filt));
     }
 
 
@@ -45,13 +86,15 @@ const Home = () => {
         <section>
             <div className='select-container'>
                 <select onChange={filterCatego}>
-                    <option value="">Category</option>
+                    <option value="">All Categorys</option>
                     {categorys.map(category => (
-                        <option value={category.name} key={category.id}>{category.name}</option>
+                        <option value={category.id} key={category.id}>{category.name}</option>
                     ))}
                 </select>
-                <input type="text" placeholder='Search your favorite product' value={inputValue} onChange={e => setInputValue(e.target.value)}/>
-                <button className='btn' onClick={search}><i className="fa-solid fa-magnifying-glass"></i></button>
+                <form onSubmit={submit}>
+                    <input type="text" placeholder='Search your favorite product' value={inputValue} onChange={e => setInputValue(e.target.value)} />
+                    <button className='btn'><i className="fa-solid fa-magnifying-glass"></i></button>
+                </form>
             </div>
             <div className='card-container'>
                 {products.map(product => (

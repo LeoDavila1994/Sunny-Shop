@@ -132,6 +132,10 @@ select{
   align-items: center;
 }
 
+form{
+  display: flex;
+  width: 100%;
+}
 
 input{
   width: 100%;

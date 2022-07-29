@@ -25,6 +25,11 @@ export const filterInputThunk = inputValue => (dispatch) => {
 
 }
 
+export const selectThunk = filt => (dispatch) => {
+    return axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products?query=${filt}`)
+        .then(res => dispatch(setProducts(res.data.data.products)))
+}
+
 export const { setProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;
