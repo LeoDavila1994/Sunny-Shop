@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/';
 import { useNavigate } from 'react-router-dom';
-import { getProductsThunk, setProducts } from "../store/slices/products.slice";
+import { getProductsThunk, setProducts, filterInputThunk } from "../store/slices/products.slice";
 
 
 
@@ -25,6 +25,11 @@ const Home = () => {
     const productDetail = (id) => {
         navigate(`/product/${id}`)
     }
+    const [ inputValue, setInputValue ] = useState("");
+
+    const search = () => {
+        dispatch(filterInputThunk(inputValue))
+    }
 
     const filterCatego = e => {
         const productList = products;
@@ -39,13 +44,14 @@ const Home = () => {
     return (
         <section>
             <div className='select-container'>
-            <input type="text" placeholder='Search your favorite product here !' />
                 <select onChange={filterCatego}>
                     <option value="">Category</option>
                     {categorys.map(category => (
                         <option value={category.name} key={category.id}>{category.name}</option>
                     ))}
                 </select>
+                <input type="text" placeholder='Search your favorite product' value={inputValue} onChange={e => setInputValue(e.target.value)}/>
+                <button className='btn' onClick={search}><i className="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <div className='card-container'>
                 {products.map(product => (

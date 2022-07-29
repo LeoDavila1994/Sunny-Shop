@@ -19,6 +19,12 @@ export const getProductsThunk = () => (dispatch) => {
         .then(res => dispatch(setProducts(res.data.data.products)))
 }
 
+export const filterInputThunk = inputValue => (dispatch) => {
+    return axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products?query=${inputValue}`)
+        .then(res => dispatch(setProducts(res.data.data.products)))
+
+}
+
 export const { setProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;
