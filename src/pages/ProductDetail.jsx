@@ -15,6 +15,7 @@ const ProductDetail = () => {
     useEffect(() => {
         axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products/${id}`)
             .then(res => setProduct(res.data.data.product))
+            window.scrollTo(0, 0)
     }, []);
 
     const lastProduct = similarProducts.length;
@@ -51,6 +52,12 @@ const ProductDetail = () => {
         } else if (numberSlider === 1) {
             setNumberSlider(0)
         }
+    }
+
+    const seeProduct = (id) => {
+        axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products/${id}`)
+            .then(res => setProduct(res.data.data.product))
+            window.scrollTo(0, 0)
     }
 
     return (
@@ -93,7 +100,7 @@ const ProductDetail = () => {
                         <i className="fa-solid fa-circle-chevron-right"></i>
                     </button>
                     {arr.map(similar => (
-                        <div className='mini-card' key={similar.id}>
+                        <div className='mini-card' key={similar.id} onClick={() => seeProduct(similar.id)}>
                             <div className='img-mini-card'>
                                 <img src={similar.productImgs[0]} alt="" />
                             </div>
