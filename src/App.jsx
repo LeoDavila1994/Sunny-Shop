@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import { NavBar, Loader } from './components'
-import { Home, LogIn, ProductDetail, Purchases } from './pages'
+import { Home, LogIn, ProductDetail, Purchases, PurchasesDetail } from './pages'
 
 
 
@@ -29,6 +29,7 @@ function App() {
             <Route path='/product/:id' element={<ProductDetail />} />
             <Route path='/login' element={<LogIn />} />
             <Route path='/purchases' element={<Purchases />} />
+            <Route path='/purchases/:id' element={<PurchasesDetail />}/>
           </Routes>
         </>
       )}
