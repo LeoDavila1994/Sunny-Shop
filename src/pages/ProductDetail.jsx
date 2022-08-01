@@ -1,37 +1,46 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
+import { getProductsThunk } from '../store/slices/products.slice';
 
 const ProductDetail = () => {
 
     const { id } = useParams();
-    const [product, setProduct] = useState({})
     const [numberSlider, setNumberSlider] = useState(0);
     const similarProducts = useSelector(state => state.products);
-    const [prevPage, setPrevPage] = useState(3);
-    const [nextPage, setNextPage] = useState(6);
+    const [indexOne, setIndexOne] = useState(0);
+    const [indexTwo, setIndexTwo] = useState(2);
+    const dispatch = useDispatch();
+
+    const [ productDetail, setProductDetail ] = useState({});
+    const [ suggestedProducts, setSuggestedProducts ] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products/${id}`)
-            .then(res => setProduct(res.data.data.product))
-            window.scrollTo(0, 0)
-    }, []);
+        const prod = similarProducts.find(productItem => productItem.id === Number(id));
+        setProductDetail(prod);
+        const filteredProducts = similarProducts.filter(product => product.category.id === prod.category.id);
+        setSuggestedProducts(filteredProducts);
+        window.scrollTo(0, 0)
+    },[similarProducts]);
 
-    const lastProduct = similarProducts.length;
-    const firstProduct = 0;
+    useEffect(() => {
+        dispatch(getProductsThunk());
+    },[]);
+
+    const lastProduct = suggestedProducts.length;
 
     const prev = () => {
-        setPrevPage(prevPage - 1);
-        setNextPage(nextPage - 1);
+        setIndexOne(indexOne - 1);
+        setIndexTwo(indexTwo - 1);
     }
 
     const next = () => {
-        setPrevPage(prevPage + 1);
-        setNextPage(nextPage + 1);
+        setIndexOne(indexOne + 1);
+        setIndexTwo(indexTwo + 1);
     }
 
-    const arr = similarProducts.slice(prevPage, nextPage);
+    const arr = suggestedProducts.slice(indexOne, indexTwo);
 
 
     const rigth = () => {
@@ -55,25 +64,27 @@ const ProductDetail = () => {
     }
 
     const seeProduct = (id) => {
-        axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products/${id}`)
-            .then(res => setProduct(res.data.data.product))
-            window.scrollTo(0, 0)
-    }
+        const prod = similarProducts.find(productItem => productItem.id === Number(id));
+        setProductDetail(prod);
+        setIndexOne(0);
+        setIndexTwo(2);
+        window.scrollTo(0, 0)
+    };
 
     return (
         <section>
             <div className='data-container'>
                 <div className='data-title'>
-                    <p>{product.title}</p>
+                    <p>{productDetail?.title}</p>
                 </div>
                 <div className='category-container'>
-                    <p>Category: {product.category}.</p>
-                    <p>Id: {product.id}.</p>
+                    <p>Category: {productDetail?.category?.name}.</p>
+                    <p>Id: {productDetail?.id}.</p>
                 </div>
                 <div>
                     <div className='data-img-container'>
                         <div className='data-img'>
-                            <img src={product.productImgs?.[`${numberSlider}`]} alt="" />
+                            <img src={productDetail?.productImgs?.[`${numberSlider}`]} alt="" />
                         </div>
                         <div className='left-arrow' onClick={left}>
                             <i className="fa-solid fa-circle-chevron-left"></i>
@@ -84,23 +95,23 @@ const ProductDetail = () => {
                     </div>
                 </div>
                 <div className='price-container'>
-                    <p>${product.price} usd</p>
+                    <p>${productDetail?.price} usd</p>
                 </div>
                 <div className='description-container'>
-                    <p>{product.description}</p>
+                    <p>{productDetail?.description}</p>
                 </div>
                 <div className='section-2'>
                     <p>Discover similar items:</p>
                 </div>
                 <div className='similar-products'>
-                    <button className='left-arrow-mini' onClick={prev} disabled={prevPage === firstProduct}>
+                    <button className='left-arrow-mini' onClick={prev} disabled={indexOne === 0}>
                         <i className="fa-solid fa-circle-chevron-left"></i>
                     </button>
-                    <button className='rigth-arrow-mini' onClick={next} disabled={nextPage === lastProduct}>
+                    <button className='rigth-arrow-mini' onClick={next} disabled={indexTwo >= lastProduct}>
                         <i className="fa-solid fa-circle-chevron-right"></i>
                     </button>
                     {arr.map(similar => (
-                        <div className='mini-card' key={similar.id} onClick={() => seeProduct(similar.id)}>
+                        <div className='mini-card' key={similar.id} onClick={()=> seeProduct(similar.id)}>
                             <div className='img-mini-card'>
                                 <img src={similar.productImgs[0]} alt="" />
                             </div>

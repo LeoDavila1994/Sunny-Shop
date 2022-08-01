@@ -28,7 +28,7 @@ const LogIn = () => {
                         </div>
                         <div className='pass-input'>
                             <p>Password:</p>
-                            <input type="text" />
+                            <input type="password" />
                         </div>
                     </div>
                 </div>
