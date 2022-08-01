@@ -68,6 +68,7 @@ const ProductDetail = () => {
         setProductDetail(prod);
         setIndexOne(0);
         setIndexTwo(2);
+        setNumberSlider(0);
         window.scrollTo(0, 0)
     };
 
