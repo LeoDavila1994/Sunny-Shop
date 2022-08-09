@@ -416,7 +416,7 @@ strong{
 .card-login{
   box-sizing: border-box;
   width: 300px;
-  height: 400px;
+  height: 450px;
   background-color: white;
   border: 1px solid rgba(128, 128, 128, 0.5);
   padding: 1rem;
@@ -424,7 +424,7 @@ strong{
 }
 
 .detail-regards{
-  height: 347px;
+  height: 400px;
   border: 1px solid #ed6d7f;
   padding: 0.5rem;
   text-align: center;
@@ -480,6 +480,12 @@ strong{
   margin: 0 1rem;
 }
 
+.login-form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .email-input p{
   width: 90%;
   margin-left: auto;
@@ -491,9 +497,10 @@ strong{
 .email-input input{
   background-color: #ed6d7f;
   width: 90%;
-  outline: #fef790;
+  outline: none;
   border-radius: 4px;
   color: white;
+  border: 0;
 }
 
 .pass-input p{
@@ -507,9 +514,20 @@ strong{
 .pass-input input{
   background-color: #ed6d7f;
   width: 90%;
-  outline: #fef790;
+  outline: none;
   border-radius: 4px;
   color: white;
+  border: 0;
+}
+
+.btn-form{
+  width: 70px;
+  margin: auto;
+  cursor: pointer;
+  background-color: #ed6d7f;
+  border: 1px  solid rgba(128, 128, 128, 0.5);
+  color: white;
+  border-radius: 4px;
 }
 
 .purchases-container{
@@ -615,6 +633,15 @@ color: gray;
   }
 
   .category-container{
+    width: 440.63px;
+  }
+
+  .purchases-info{
+    width: 440.63px;
+
+  }
+
+  .purch-det-inf{
     width: 440.63px;
   }
 
