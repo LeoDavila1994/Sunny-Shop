@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProductsThunk } from '../store/slices/products.slice';
+import { getProductsThunk, } from '../store/slices/products.slice';
+import { purchasesThunk } from '../store/slices/purchases.slice';
 
 const PurchasesDetail = () => {
 
     const dispatch = useDispatch();
     const purchases = useSelector(state => state.purchases.data?.purchases);
-    const products = useSelector(state => state.products);
     const { id } = useParams();
-    const [ sameProduct, setSameProduct ] = useState({});
-
     const [ purchData, setPurchData ] = useState({});
 
 
@@ -19,7 +17,11 @@ const PurchasesDetail = () => {
         const findPurch = purchases?.find(purchase => purchase.id === Number(id));
         setPurchData(findPurch);
         dispatch(getProductsThunk());
-    },[]);
+    },[purchases]);
+
+    useEffect(() => {
+        dispatch(purchasesThunk())
+    },[])
 
     console.log(purchData);
 
