@@ -19,6 +19,11 @@ export const getCartThunk = () => (dispatch) => {
         .then(res => dispatch(setCart(res.data)))
 }
 
+export const addProductsThunk = add => (dispatch) => {
+    return axios.post(`https://ecommerce-api-react.herokuapp.com/api/v1/cart`, add, getConfig())
+        .then(() => dispatch(getCartThunk()))
+}
+
 export const { setCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

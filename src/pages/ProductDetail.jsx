@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
+import { addProductsThunk } from '../store/slices/cart.slice';
 import { getProductsThunk } from '../store/slices/products.slice';
 
 const ProductDetail = () => {
@@ -88,6 +89,8 @@ const ProductDetail = () => {
             id: productDetail.id,
             quantity: quantity
         }
+
+        dispatch(addProductsThunk(add))
     }
 
     return (
