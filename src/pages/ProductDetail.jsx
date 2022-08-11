@@ -26,7 +26,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         dispatch(getProductsThunk());
-    },[]);
+    },[id]);
 
     const lastProduct = suggestedProducts.length;
 

@@ -16,14 +16,11 @@ const PurchasesDetail = () => {
     useEffect(() => {
         const findPurch = purchases?.find(purchase => purchase.id === Number(id));
         setPurchData(findPurch);
-        dispatch(getProductsThunk());
     },[purchases]);
 
     useEffect(() => {
         dispatch(purchasesThunk())
     },[])
-
-    console.log(purchData);
 
     return (
         <section>
