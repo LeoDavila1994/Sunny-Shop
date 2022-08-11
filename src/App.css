@@ -166,6 +166,17 @@ nav{
   border: 1px solid white;
 }
 
+.checkout button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background-color: #ed6d7f;
+  cursor: pointer;
+  border: 0;
+}
+
 .quantity-display{
   display: flex;
   justify-content: center;

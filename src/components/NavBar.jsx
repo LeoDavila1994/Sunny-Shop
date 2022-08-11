@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getCartThunk } from "../store/slices/cart.slice";
+import { checkOutThunk, getCartThunk } from "../store/slices/cart.slice";
 import { useSelector } from "react-redux";
 
 
@@ -44,6 +44,10 @@ const NavBar = () => {
         return total;
     }
 
+    const checkOut = () =>{
+        dispatch(checkOutThunk())
+    }
+
     return (
         <section>
             <div className='nav-container'>
@@ -76,8 +80,8 @@ const NavBar = () => {
                         <div className="total">
                             <p>Total: $ {getTotal()} usd.</p>
                         </div>
-                        <div className="checkout">
-                            <p>Check Out</p>
+                        <div className="checkout" onClick={checkOut}>
+                            <button>Check Out</button>
                         </div>
                     </div>
                 }
