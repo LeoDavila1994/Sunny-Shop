@@ -72,6 +72,24 @@ const ProductDetail = () => {
         window.scrollTo(0, 0)
     };
 
+    const [quantity, setQuantity] = useState(1);
+
+    const less = () => {
+        setQuantity(quantity - 1)
+    }
+
+    const more = () => {
+        setQuantity(quantity + 1)
+    }
+
+
+    const addProduct = () => {
+        const add = {
+            id: productDetail.id,
+            quantity: quantity
+        }
+    }
+
     return (
         <section>
             <div className='data-container'>
@@ -97,6 +115,14 @@ const ProductDetail = () => {
                 </div>
                 <div className='price-container'>
                     <p>${productDetail?.price} usd</p>
+                </div>
+                <div>
+                    <div className='quantity-product'>
+                        <button onClick={less} disabled={quantity === 1}>-</button>
+                        <p>{quantity}</p>
+                        <button onClick={more}>+</button>
+                    </div>
+                    <button className='btn-toadd' onClick={addProduct}>Add to Cart +</button>
                 </div>
                 <div className='description-container'>
                     <p>{productDetail?.description}</p>

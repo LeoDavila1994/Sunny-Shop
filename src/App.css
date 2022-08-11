@@ -115,15 +115,6 @@ nav{
   cursor: pointer;
 }
 
-.car-shop-input{
-  display: none;
-}
-
-#sidebar:checked ~ .sidebar{
-  right: 0;
-  transition: 300ms;
-}
-
 .x{
   width: 100%;
   display: flex;
@@ -131,6 +122,7 @@ nav{
   align-items: center;
   padding: 0.5rem;
   box-sizing: border-box;
+  color: white;
 }
 
 .x-icon{
@@ -141,19 +133,42 @@ nav{
   position: fixed;
   top: 50vh;
   transform: translateY(-50%);
-  right: -205px;
+  right: 0px;
   width: 200px;
-  height: 250px;
-  min-height: 550px;
+  height: 550px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  transition: 300ms;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+.total{
+  width: 90%;
+  color: white;
+}
+
+.checkout{
+  width: 90%;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background-color: #ed6d7f;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid white;
 }
 
 .quantity-display{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 60%;
   height: 50px;
@@ -181,13 +196,15 @@ nav{
 
 .product-card{
   width: 90%;
-  height: 150px;
+  height: 170px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: white;
   border-bottom: 1px solid white;
+  box-sizing: border-box;
+  padding: 0.5rem;
 }
 
 .redirection{
@@ -390,6 +407,46 @@ strong{
   font-family: 'Play', sans-serif;
   font-size: 2rem;
   font-weight: bold;
+}
+
+.quantity-product{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quantity-product p{
+  width: 30px;
+  height: 20px;
+  background-color: #ed6d7f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.quantity-product button{
+  color: white;
+  background-color: #ed6d7f;
+  border: 0;
+  width: 20px;
+  height: 20px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn-toadd{
+  background-color: #ed6d7f;
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
 }
 
 .description-container{
