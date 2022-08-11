@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addProductsThunk } from '../store/slices/cart.slice';
 import { getProductsThunk } from '../store/slices/products.slice';
 
@@ -13,6 +13,7 @@ const ProductDetail = () => {
     const [indexOne, setIndexOne] = useState(0);
     const [indexTwo, setIndexTwo] = useState(2);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [ productDetail, setProductDetail ] = useState({});
     const [ suggestedProducts, setSuggestedProducts ] = useState([]);
@@ -83,14 +84,18 @@ const ProductDetail = () => {
         setQuantity(quantity + 1)
     }
 
+    const token = localStorage.getItem("token");
 
     const addProduct = () => {
         const add = {
             id: productDetail.id,
             quantity: quantity
         }
-
-        dispatch(addProductsThunk(add))
+        if(token){
+            dispatch(addProductsThunk(add))
+        } else {
+            navigate("/login")
+        }
     }
 
     return (
