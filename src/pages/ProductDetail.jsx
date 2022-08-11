@@ -93,6 +93,8 @@ const ProductDetail = () => {
         }
         if(token){
             dispatch(addProductsThunk(add))
+            setQuantity(1);
+            alert("Added Successfully")
         } else {
             navigate("/login")
         }

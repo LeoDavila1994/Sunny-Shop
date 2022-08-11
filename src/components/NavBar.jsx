@@ -45,6 +45,7 @@ const NavBar = () => {
     }
 
     const checkOut = () =>{
+        alert("Successful purchase")
         dispatch(checkOutThunk())
     }
 
