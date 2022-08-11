@@ -27,11 +27,18 @@ const NavBar = () => {
 
     const products = useSelector(state => state?.cart.data?.cart.products);
 
+
+    const getPriceByUnity = ( byUnity, quantity) => {
+        let total = byUnity * quantity;
+
+        return total;
+    }
+
     const getTotal = () => {
         let total = 0;
 
         products?.forEach(product =>{
-            total += Number(product.price)
+            total += (Number(product.price) * product.productsInCart.quantity)
         })
 
         return total;
@@ -59,7 +66,7 @@ const NavBar = () => {
                             {products?.map(product => (
                                 <div className="product-card" key={product.id} >
                                     <label onClick={() => navigate(`/product/${product.productsInCart.productId}`)} htmlFor="sidebar"><p className="redirection">{product.title}</p></label>
-                                    <p>$ {product.price} usd</p>
+                                    <p>$ {getPriceByUnity(product.price, product.productsInCart.quantity)} usd</p>
                                     <div className="quantity-display">
                                         <p>x{product.productsInCart.quantity}</p>
                                     </div>
